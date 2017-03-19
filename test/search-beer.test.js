@@ -6,9 +6,9 @@ const { suite, test } = require('mocha');
 const request = require('supertest');
 const server = require('../app');
 
-suite('part2 routes bonus', () => {
+suite('Connection with Brewerydb test', () => {
 
-  test('GET /search?q=Stone_IPA', (done) => {
+  test('Searches Brewerydb by a beer by name', (done) => {
   request(server)
     .get('/search?q=Stone_IPA')
     .set('Accept', 'application/json')
