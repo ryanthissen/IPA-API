@@ -9,17 +9,17 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.12.3",
-    "mocha": "^3.2.0",
     "supertest": "^1.2.0",
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
+   "mocha": "^3.2.0",
     "should": "^7.1.0",
     "supertest": "^1.0.0"
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test"
+    "test": "mocha"
   },
   "directories": {
     "test": "test"

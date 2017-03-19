@@ -102,7 +102,7 @@
 
 `DELTE to /token to sign out and loose your authentication token`
 
-`GET to /beers/:name to search for a beer by a specific name(on the brewerydb api)`
+`GET to /search/:name to search for a beer by a specific name(on the brewerydb api)`
 
 `GET to /favorites to get all favorites of a user`
 
