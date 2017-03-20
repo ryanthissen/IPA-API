@@ -11,44 +11,57 @@ schemes:
   # tip: remove http to make production-grade
   - http
   - https
-# format of bodies a client can send (Content-Type)
 consumes:
   - application/json
-# format of the responses to the client (Accepts)
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
-    get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
+  /users:
+    post:
+      description: Creates new account
+      operationId: createAccount
       parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
+        - name: user
+          in: body
+          description: user to add to the database
+          required: true
+          schema:
+            $ref: '#/definitions/User'
       responses:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
+            $ref: "#/definitions/NewUser"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /beer:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: beer
+  # /token:
+  #   get:
+  #     description: gets token to authenticate user
+  #     operationId: tokenCheck
+  #     parameters:
+  #       - name: cookie
+  #         in: header
+  #         description: gets token from req.swagger.user.cookie to authenticate user
+  #         required: false
+  #         schema:
+  #           $ref: '#/definitions/Cookie'
+  #     responses:
+  #       "200":
+  #         description: Success
+  #         schema:
+  #           # a pointer to a definition
+  #           $ref: "#/definitions/Authenticated"
+  #       # responses may fall through to errors
+  #       default:
+  #         description: Error
+  #         schema:
+  #           $ref: "#/definitions/ErrorResponse"
+  /search:
     get:
-      description: Returns list of beer to the caller
-      # used as the method name of the controller
-      operationId: getBeers
+      description: Returns a specific beer from brewerydb
+      operationId: searchBeer
       parameters:
         - name: name
           in: query
@@ -59,29 +72,78 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/GetBeer"
-        # responses may fall through to errors
+            $ref: "#/definitions/SearchBeer"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
-# complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+  SearchBeer:
+    required:
+      - id
+      - beer_name
+      - abv
+      - ibu
+      - label_url
+      - description
+      - type_name
+    properties:
+      id:
+        type: string
+      beer_name:
+        type: string
+      abv:
+        type: string
+      ibu:
+        type: string
+      label_url:
+        type: string
+      description:
+        type: string
+      type_name:
+        type: string
+  NewUser:
     required:
       - message
     properties:
       message:
         type: string
-  GetBeer:
-    required:
-      - message
+  User:
+    type: object
     properties:
-      message:
+      first_name:
         type: string
+        description: first name of new user
+      last_name:
+        type: string
+        description: last name of new user
+      username:
+        type: string
+        description: username
+      email:
+        type: string
+        description: email
+      password:
+        type: string
+        description: password
+    required:
+      - first_name
+      - last_name
+      - username
+      - email
+      - password
+  # Cookie:
+  #   type: header
+  #   properties:
+  #     token:
+  #       type: int64
+  #       description: cookie token
+  # Authenticated:
+  #   properties:
+  #     message:
+  #       type: boolean
   ErrorResponse:
     required:
       - message
