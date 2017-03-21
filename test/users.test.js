@@ -7,7 +7,7 @@ const { suite, test } = require('mocha');
 const bcrypt = require('bcrypt');
 const request = require('supertest');
 // const knex = require('../knex');
-const server = require('../app');
+const server = require('../server');
 
 
 suite('User tests', (done) => {
