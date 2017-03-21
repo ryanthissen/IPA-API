@@ -26,12 +26,70 @@ paths:
           description: user to add to the database
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/CreateUser'
       responses:
         "200":
           description: Success
           schema:
             $ref: "#/definitions/NewUser"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /favorites:
+    get:
+      description: Returns a list favorites of a client
+      operationId: returnFavorites
+      parameters:
+        - name: user
+          in: body
+          description: the favorite beers of the client
+          required: true
+          schema:
+            $ref: "#/definitions/FavoritesRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/FavoritesResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Adds a new beer to a clients list of favorites
+      operationId: addFavorite
+      parameters:
+        - name: user
+          in: body
+          description: information on new favorite beer
+          required: true
+          schema:
+            $ref: "#/definitions/AddFavoriteRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AddFavoriteResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /favorite:
+    get:
+      description: returns more detailed information about a specific favorite beer
+      operationId: specificFavorite
+      parameters:
+        - name: name
+          in: query
+          description: detailed information on this specific beer
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SpecificFavoriteBeer"
         default:
           description: Error
           schema:
@@ -81,6 +139,53 @@ paths:
     x-swagger-pipe: swagger_raw
 definitions:
   SearchBeer:
+    type: object
+    required:
+      - id
+      - beer_name
+      - abv
+      - ibu
+      - label_url
+      - description
+      - type_name
+    properties:
+      id:
+        type: string
+      beer_name:
+        type: string
+      abv:
+        type: string
+      ibu:
+        type: string
+      label_url:
+        type: string
+      description:
+        type: string
+      type_name:
+        type: string
+  FavoritesRequest:
+    type: object
+    required:
+      - user_id
+    properties:
+      user_id:
+        type: string
+        description: unique user id
+  FavoritesResponse:
+    required:
+      - beers
+    properties:
+      beers:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            label_url:
+              type: string
+  SpecificFavoriteBeer:
+    type: object
     required:
       - id
       - beer_name
@@ -110,8 +215,14 @@ definitions:
     properties:
       message:
         type: string
-  User:
+  CreateUser:
     type: object
+    required:
+      - first_name
+      - last_name
+      - username
+      - email
+      - password
     properties:
       first_name:
         type: string
@@ -128,12 +239,39 @@ definitions:
       password:
         type: string
         description: password
+  AddFavoriteRequest:
+    type: object
     required:
-      - first_name
-      - last_name
-      - username
-      - email
-      - password
+      - beer_id
+    properties:
+      beer_id:
+        type: string
+        description: id of new favorite beer
+  AddFavoriteResponse:
+    type: object
+    required:
+      - id
+      - beer_name
+      - abv
+      - ibu
+      - label_url
+      - description
+      - type_name
+    properties:
+      id:
+        type: string
+      beer_name:
+        type: string
+      abv:
+        type: string
+      ibu:
+        type: string
+      label_url:
+        type: string
+      description:
+        type: string
+      type_name:
+        type: string
   # Cookie:
   #   type: header
   #   properties:

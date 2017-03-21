@@ -19,7 +19,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test"
+    "test": "swagger project test",
+    "edit": "swagger project edit"
   },
   "directories": {
     "test": "test"
