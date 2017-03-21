@@ -31,7 +31,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/NewUser"
+            $ref: "#/definitions/CreateUserSuccess"
         default:
           description: Error
           schema:
@@ -41,12 +41,11 @@ paths:
       description: Returns a list favorites of a client
       operationId: returnFavorites
       parameters:
-        - name: user
-          in: body
+        - name: user_id
+          in: query
           description: the favorite beers of the client
           required: true
-          schema:
-            $ref: "#/definitions/FavoritesRequest"
+          type: string
       responses:
         "200":
           description: Success
@@ -75,6 +74,24 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    delete:
+      description: delete a beer from list of favorites
+      operationId: deleteFromFavorites
+      parameters:
+        - name: id
+          description: beer id
+          type: string
+          in: query
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/DeleteFavoriteBeer"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /favorite:
     get:
       description: returns more detailed information about a specific favorite beer
@@ -94,6 +111,80 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /wishlist:
+    get:
+      description: Returns all elements on a client's wishlist
+      operationId: returnWishlist
+      parameters:
+        - name: user_id
+          in: query
+          description: the wishlist beers of the client
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/WishlistResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Adds a new beer to a client's wishlist
+      operationId: addToWishlist
+      parameters:
+        - name: beer_id
+          in: query
+          description: the beer client wants to add to wishlist
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AddToWishlistResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      description: delete a beer from client's wishlist
+      operationId: deleteFromWishlist
+      parameters:
+        - name: beer_id
+          description: beer id
+          type: string
+          in: query
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/DeleteWishlistBeer"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /search:
+    get:
+      description: Returns a specific beer from brewerydb
+      operationId: searchBeer
+      parameters:
+      - name: name
+        in: query
+        description: The name of the beer that was searched
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SearchBeer"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   # /token:
   #   get:
   #     description: gets token to authenticate user
@@ -109,36 +200,68 @@ paths:
   #       "200":
   #         description: Success
   #         schema:
-  #           # a pointer to a definition
+  #           a pointer to a definition
   #           $ref: "#/definitions/Authenticated"
-  #       # responses may fall through to errors
+  #       responses may fall through to errors
   #       default:
   #         description: Error
   #         schema:
   #           $ref: "#/definitions/ErrorResponse"
-  /search:
-    get:
-      description: Returns a specific beer from brewerydb
-      operationId: searchBeer
-      parameters:
-        - name: name
-          in: query
-          description: The name of the beer that was searched
-          required: true
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/SearchBeer"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 definitions:
-  SearchBeer:
+  CreateUser:
+    type: object
+    required:
+      - first_name
+      - last_name
+      - username
+      - email
+      - password
+    properties:
+      first_name:
+        type: string
+        description: first name of new user
+      last_name:
+        type: string
+        description: last name of new user
+      username:
+        type: string
+        description: username
+      email:
+        type: string
+        description: email
+      password:
+        type: string
+        description: password
+  CreateUserSuccess:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  FavoritesResponse:
+    required:
+      - beers
+    properties:
+      beers:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            label_url:
+              type: string
+  AddFavoriteRequest:
+    type: object
+    required:
+      - beer_id
+    properties:
+      beer_id:
+        type: string
+        description: id of new favorite beer
+  AddFavoriteResponse:
     type: object
     required:
       - id
@@ -163,27 +286,13 @@ definitions:
         type: string
       type_name:
         type: string
-  FavoritesRequest:
+  DeleteFavoriteBeer:
     type: object
     required:
-      - user_id
+      - beer_name
     properties:
-      user_id:
+      beer_name:
         type: string
-        description: unique user id
-  FavoritesResponse:
-    required:
-      - beers
-    properties:
-      beers:
-        type: array
-        items:
-          type: object
-          properties:
-            name:
-              type: string
-            label_url:
-              type: string
   SpecificFavoriteBeer:
     type: object
     required:
@@ -209,45 +318,52 @@ definitions:
         type: string
       type_name:
         type: string
-  NewUser:
+  WishlistResponse:
     required:
-      - message
+      - beers
     properties:
-      message:
-        type: string
-  CreateUser:
+      beers:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            label_url:
+              type: string
+  AddToWishlistResponse:
     type: object
     required:
-      - first_name
-      - last_name
-      - username
-      - email
-      - password
+      - id
+      - beer_name
+      - abv
+      - ibu
+      - label_url
+      - description
+      - type_name
     properties:
-      first_name:
+      id:
         type: string
-        description: first name of new user
-      last_name:
+      beer_name:
         type: string
-        description: last name of new user
-      username:
+      abv:
         type: string
-        description: username
-      email:
+      ibu:
         type: string
-        description: email
-      password:
+      label_url:
         type: string
-        description: password
-  AddFavoriteRequest:
+      description:
+        type: string
+      type_name:
+        type: string
+  DeleteWishlistBeer:
     type: object
     required:
       - beer_id
     properties:
       beer_id:
         type: string
-        description: id of new favorite beer
-  AddFavoriteResponse:
+  SearchBeer:
     type: object
     required:
       - id

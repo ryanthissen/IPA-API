@@ -102,15 +102,13 @@
 
 `DELTE to /token to sign out and loose your authentication token`
 
-`GET to /search/:name to search for a beer by a specific name(on the brewerydb api)`
+`GET to /search to search for a beer by a specific name(on the brewerydb api)`
 
 `GET to /favorites to get all favorites of a user`
 
-`GET to /favorites/:beer_name to get detailed info of a specific favorite`
+`GET to /favorite/:beer_name to get detailed info of a specific favorite`
 
 `POST to /favorites to add a beer to your favorites(will initialize with an empty comment)`
-
-`PATCH to /favorites/:beer_name to update your comment on a favorite beer`
 
 `DELETE to /favorites to delete a specific beer`
 
