@@ -75,6 +75,23 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    delete:
+      description: delete a beer from list of favorites
+      parameters:
+        - name: id
+          description: beer id
+          type: string
+          in: query
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/DeleteFavoriteBeer"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /favorite:
     get:
       description: returns more detailed information about a specific favorite beer
@@ -208,6 +225,13 @@ definitions:
       description:
         type: string
       type_name:
+        type: string
+  DeleteFavoriteBeer:
+    type: object
+    required:
+      - beer_name
+    properties:
+      beer_name:
         type: string
   NewUser:
     required:
