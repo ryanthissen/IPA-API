@@ -8,19 +8,21 @@
   "license": "ISC",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "express": "^4.12.3",
-    "mocha": "^3.2.0",
+    "knex": "^0.12.8",
     "supertest": "^1.2.0",
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
+    "mocha": "^3.2.0",
     "should": "^7.1.0",
     "supertest": "^1.0.0"
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test",
     "edit": "swagger project edit"
+    "test": "mocha"
   },
   "directories": {
     "test": "test"
