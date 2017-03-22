@@ -1,10 +1,29 @@
 'use strict';
 
 var url = require('url');
-
+const key = require('../../apikey');
+const fetch = require('node-fetch');
 
 module.exports.searchBeer = function searchBeer(req, res, next) {
-  console.log('this');
+  fetch(`http://api.brewerydb.com/v2/search/?key=${key}&q='Dawn_Of_The_red'&type=beer`)
+  .then((res) => {
+    return res.json();
+  })
+  .then((json) => {
+    let firstBeer = json.data[1];
+    let respBeer = {}
+    respBeer.id = firstBeer.id,
+    respBeer.name = firstBeer.name,
+    respBeer.abv = firstBeer.abv,
+    respBeer.ibu = firstBeer.ibu,
+    respBeer.label_url = firstBeer.labels.medium,
+    respBeer.description = firstBeer.description,
+    respBeer.type_name = firstBeer.style.shortName,
+    console.log(respBeer.id);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
   let beer = {
     id: "PAM6wX",
     name: "Stone IPA",
