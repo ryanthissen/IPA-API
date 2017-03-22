@@ -8,7 +8,7 @@ suite('Connection with Brewerydb test', () => {
 
   test('Searches Brewerydb for a beer by name and returns a JSON', (done) => {
   request(server)
-    .get('/search?q=Stone_IPA')
+    .get('/search?name=Stone_IPA')
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
     .expect(200, {
