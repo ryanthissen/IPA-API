@@ -12,7 +12,11 @@ const server = require('../app');
 
 suite('User tests', (done) => {
   before((done) => {
-  knex.migrate.latest()
+    knex.migrate.rollback()
+    .then(() =>{
+      return knex.migrate.latest()
+
+    })
     .then(() => {
       done();
     })
@@ -49,35 +53,8 @@ suite('User tests', (done) => {
         first_name: 'Steph',
         last_name: 'Curry',
         username: 'Threesus',
-        email: 'Threesus@gmail.com'
+        email: 'Threesus@gmail.com',
+        token: 'poo',
       }, done);
-        // knex('users')
-        //   .where('id', 2)
-        //   .first()
-        //   .then((user) => {
-        //     const hashedPassword = user.hashed_password;
-        //
-        //     delete user.hashed_password;
-        //     delete user.created_at;
-        //     delete user.updated_at;
-        //
-        //     assert.deepEqual(user, {
-        //       id: 2,
-        //       first_name: 'Steph',
-        //       last_name: 'Curry',
-        //       user_name: 'Threesus',
-        //       email: 'Threesus@gmail.com'
-        //     });
-        //
-        //     // eslint-disable-next-line no-sync
-        //     const isMatch = bcrypt.compareSync(password, hashedPassword);
-        //     assert.isTrue(isMatch, "passwords don't match");
-        //     done();
-        //   })
-        //   .catch((dbErr) => {
-        //     done(dbErr);
-        //   });
-      // });
-
   });
 });

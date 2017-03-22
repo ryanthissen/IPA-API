@@ -11,7 +11,4 @@ exports.seed = function(knex, Promise) {
           hashed_password: 'beer123'
         });
     })
-    .then(() => {
-      return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));");
-    });
 };
