@@ -2,6 +2,8 @@
 
 var url = require('url');
 
+var Default = require('./DefaultService');
+
 module.exports.returnWishlist = function returnWishlist(req, res, next) {
   Default.returnWishlist(req.swagger.params, res, next);
 };
