@@ -390,7 +390,7 @@ definitions:
     type: object
     required:
       - id
-      - beer_name
+      - name
       - abv
       - ibu
       - label_url
@@ -399,7 +399,7 @@ definitions:
     properties:
       id:
         type: string
-      beer_name:
+      name:
         type: string
       abv:
         type: string
