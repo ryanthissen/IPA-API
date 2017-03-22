@@ -1,12 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const humps = require('humps');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../knexfile.js')[env];
-const knex = require('knex')(config);
+'use strict';
 
+var url = require('url');
 
-//searches the brewerydb for a specific beer!
-router.get('/search', (req, res) => {
-
-});
+module.exports.searchBeer = function searchBeer(req, res, next) {
+  Default.searchBeer(req.swagger.params, res, next);
+};

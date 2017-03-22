@@ -1,24 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const humps = require('humps');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../knexfile.js')[env];
-const knex = require('knex')(config);
+'use strict';
 
+var url = require('url');
 
-//get a users wishlist!
-router.get('/wishlist', (req, res) => {
+module.exports.returnWishlist = function returnWishlist(req, res, next) {
+  Default.returnWishlist(req.swagger.params, res, next);
+};
 
-});
+module.exports.addToWishlist = function addToWishlist(req, res, next) {
+  Default.addToWishlist(req.swagger.params, res, next);
+};
 
-//add a beer to a users wishlist
-router.post('/wishlist', (req, res) => {
-
-});
-
-//delete a beer from a users wishlist
-router.delete('/wishlist', (req, res) => {
-
-});
-
-module.exports = router;
+module.exports.deleteFromWishlist = function deleteFromWishlist(req, res, next) {
+  Default.deleteFromWishlist(req.swagger.params, res, next);
+};

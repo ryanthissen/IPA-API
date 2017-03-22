@@ -1,14 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const humps = require('humps');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../knexfile.js')[env];
-const knex = require('knex')(config);
+'use strict';
 
+var url = require('url');
 
-//gets a specific favorite specified in the query params
-router.get('/favorite', (req, res) => {
-
-});
-
-module.exports = router;
+module.exports.specificFavorite = function specificFavorite(req, res, next) {
+  Default.specificFavorite(req.swagger.params, res, next);
+};

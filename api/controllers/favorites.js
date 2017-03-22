@@ -1,24 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const humps = require('humps');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../knexfile.js')[env];
-const knex = require('knex')(config);
+'use strict';
 
+var url = require('url');
 
-//get a users favorites!
-router.get('/favorites', (req, res) => {
+var Default = require('./DefaultService');
 
-});
+module.exports.returnFavorites = function returnFavorites(req, res, next) {
+  Default.returnFavorites(req.swagger.params, res, next);
+};
 
-//add a beer to a users favorites
-router.post('/favorites', (req, res) => {
+module.exports.addFavorite = function addFavorite(req, res, next) {
+  Default.addFavorite(req.swagger.params, res, next);
+};
 
-});
-
-//delete a beer from a users favorites
-router.delete('/favorites', (req, res) => {
-
-});
-
-module.exports = router;
+module.exports.deleteFromFavorites = function deleteFromFavorites(req, res, next) {
+  Default.deleteFromFavorites(req.swagger.params, res, next);
+};
