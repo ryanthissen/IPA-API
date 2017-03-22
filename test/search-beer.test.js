@@ -1,12 +1,17 @@
 'use strict';
 
-const { suite, test } = require('mocha');
+const {
+  suite,
+  test
+} = require('mocha');
 const request = require('supertest');
 const server = require('../app');
+
 
 suite('Connection with Brewerydb test', () => {
 
   test('Searches Brewerydb for a beer by name and returns a JSON', (done) => {
+
   request(server)
     .get('/search?name=Stone_IPA')
     .set('Accept', 'application/json')
@@ -23,11 +28,11 @@ suite('Connection with Brewerydb test', () => {
   });
 
   test('Returns 400 and "Beer not Found" if the beer doesn\'t exist in BreweryDB', (done) => {
-  request(server)
-    .get('/search?q=Stone_IPA')
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /plain/)
-    .expect(400, 'Beer not found', done);
+    request(server)
+      .get('/search?q=Stone_IPA')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /plain/)
+      .expect(400, 'Beer not found', done);
   });
 
 });

@@ -3,30 +3,38 @@
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
-const { suite, test } = require('mocha');
+const {
+  suite,
+  test
+} = require('mocha');
 const bcrypt = require('bcrypt');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../app');
 
-
 suite('User tests', (done) => {
   before((done) => {
     knex.migrate.rollback()
-    .then(() =>{
-      return knex.migrate.latest()
+      .then(() => {
+        return knex.migrate.latest()
 
-    })
-    .then(() => {
-      done();
-    })
-    .catch((err) => {
-      done(err);
-    });
+      })
+      .then(() => {
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
   });
 
   beforeEach((done) => {
-    knex.seed.run()
+    knex.migrate.rollback()
+      .then(() => {
+        return knex.migrate.latest()
+      })
+      .then(() => {
+        return knex.seed.run()
+      })
       .then(() => {
         done();
       })
