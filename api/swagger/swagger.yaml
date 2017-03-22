@@ -240,11 +240,25 @@ definitions:
         type: string
         description: password
   CreateUserSuccess:
+    type: object
     required:
-      - message
+      - first_name
+      - last_name
+      - username
+      - email
     properties:
-      message:
+      first_name:
         type: string
+        description: first name of new user
+      last_name:
+        type: string
+        description: last name of new user
+      username:
+        type: string
+        description: username
+      email:
+        type: string
+        description: email
   FavoritesResponse:
     required:
       - beers
