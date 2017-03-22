@@ -28,7 +28,13 @@ suite('User tests', (done) => {
   });
 
   beforeEach((done) => {
-    knex.seed.run()
+    knex.migrate.rollback()
+      .then(() => {
+        return knex.migrate.latest()
+      })
+      .then(() => {
+        return knex.seed.run()
+      })
       .then(() => {
         done();
       })
