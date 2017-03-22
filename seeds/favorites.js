@@ -1,10 +1,10 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('favorites').del()
+  return knex('user_beers').del()
     .then(function() {
       return Promise.all([
         // Inserts seed entries
-        knex('favorites').insert({
+        knex('user_beers').insert({
           id: 1,
           beer_id: 1,
           user_id: 1,
@@ -16,6 +16,6 @@ exports.seed = function(knex, Promise) {
       ]);
     })
     .then(() => {
-      return knex.raw("SELECT setval('favorites_id_seq', (SELECT MAX(id) FROM favorites));");
+      return knex.raw("SELECT setval('user_beers_id_seq', (SELECT MAX(id) FROM user_beers));");
     });
 };
