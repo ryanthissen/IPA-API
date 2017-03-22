@@ -17,6 +17,7 @@ produces:
   - application/json
 paths:
   /users:
+    x-swagger-router-controller: users
     post:
       description: Creates new account
       operationId: createAccount
@@ -37,6 +38,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /favorites:
+    x-swagger-router-controller: favorites
     get:
       description: Returns a list favorites of a client
       operationId: returnFavorites
@@ -93,6 +95,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /favorite:
+    x-swagger-router-controller: favorite
     get:
       description: returns more detailed information about a specific favorite beer
       operationId: specificFavorite
@@ -112,6 +115,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /wishlist:
+    x-swagger-router-controller: wishlist
     get:
       description: Returns all elements on a client's wishlist
       operationId: returnWishlist
@@ -167,6 +171,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /search:
+    x-swagger-router-controller: search
     get:
       description: Returns a specific beer from brewerydb
       operationId: searchBeer

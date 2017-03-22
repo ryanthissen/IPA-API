@@ -1,12 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const humps = require('humps');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../knexfile.js')[env];
-const knex = require('knex')(config);
+'use strict';
 
+var url = require('url');
 
-//searches the brewerydb for a specific beer!
-router.post('/users', (req, res) => {
+var Default = require('./DefaultService');
 
-});
+module.exports.createAccount = function createAccount(req, res, next) {
+  Default.createAccount(req.swagger.params, res, next);
+};
