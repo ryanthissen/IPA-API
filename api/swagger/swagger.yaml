@@ -242,11 +242,15 @@ definitions:
   CreateUserSuccess:
     type: object
     required:
+      - token
       - first_name
       - last_name
       - username
       - email
     properties:
+      token:
+        type: string
+        description: jwt token
       first_name:
         type: string
         description: first name of new user
@@ -386,7 +390,7 @@ definitions:
     type: object
     required:
       - id
-      - beer_name
+      - name
       - abv
       - ibu
       - label_url
@@ -395,7 +399,7 @@ definitions:
     properties:
       id:
         type: string
-      beer_name:
+      name:
         type: string
       abv:
         type: string

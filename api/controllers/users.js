@@ -34,16 +34,11 @@ module.exports.createAccount = function createAccount(req, res, next) {
       delete user.hashed_password;
       delete user.created_at;
       delete user.updated_at;
-      console.log(user);
       // const claim = { userId: users[0].id };
       // const token = jwt.sign(claim, process.env.JWT_KEY, {
       //   expiresIn: '7 days',
       // });
-      // res.cookie('token', token, {
-      //   httpOnly: true,
-      //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-      //   secure: router.get('env') === 'production',
-      // });
+      user.token = 'poo';
       res.status(200).send(user);
     })
     .catch((err) => {
