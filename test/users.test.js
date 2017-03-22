@@ -39,46 +39,45 @@ suite('User tests', (done) => {
       .send({
         first_name: 'Steph',
         last_name: 'Curry',
-        user_name: 'Threesus',
+        username: 'Threesus',
         email: 'Threesus@gmail.com',
         password,
       })
+      .expect('Content-Type', /json/)
       .expect(200, {
         id: 2,
         first_name: 'Steph',
         last_name: 'Curry',
-        user_name: 'Threesus',
+        username: 'Threesus',
         email: 'Threesus@gmail.com'
-      })
-      .expect('Content-Type', /json/)
-      .end((httpErr, _res) => {
-        if (httpErr) {
-          return done(httpErr);
-        }
-        knex('users')
-        .where('id', 2)
-        .first()
-        .then((user) => {
-          const hashedPassword = user.hashed_password;
+      }, done);
+        // knex('users')
+        //   .where('id', 2)
+        //   .first()
+        //   .then((user) => {
+        //     const hashedPassword = user.hashed_password;
+        //
+        //     delete user.hashed_password;
+        //     delete user.created_at;
+        //     delete user.updated_at;
+        //
+        //     assert.deepEqual(user, {
+        //       id: 2,
+        //       first_name: 'Steph',
+        //       last_name: 'Curry',
+        //       user_name: 'Threesus',
+        //       email: 'Threesus@gmail.com'
+        //     });
+        //
+        //     // eslint-disable-next-line no-sync
+        //     const isMatch = bcrypt.compareSync(password, hashedPassword);
+        //     assert.isTrue(isMatch, "passwords don't match");
+        //     done();
+        //   })
+        //   .catch((dbErr) => {
+        //     done(dbErr);
+        //   });
+      // });
 
-          delete user.hashed_password;
-          delete user.created_at;
-          delete user.updated_at;
-
-          assert.deepEqual(user, {
-            id: 2,
-            first_name: 'Steph',
-            last_name: 'Curry',
-            user_name: 'Threesus',
-            email: 'Threesus@gmail'
-          });
-
-          // eslint-disable-next-line no-sync
-          const isMatch = bcrypt.compareSync(password, hashedPassword);
-
-          assert.isTrue(isMatch, "passwords don't match");
-          done();
-        });
-    });
   });
 });
