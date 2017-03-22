@@ -16,6 +16,7 @@
     "express-validation": "^1.0.2",
     "humps": "^2.0.0",
     "joi": "^10.2.2",
+    "jsonwebtoken": "^7.3.0",
     "knex": "^0.12.8",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
