@@ -1,7 +1,7 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('beers').del()
+  return knex('users').del()
     .then(() =>  {
       return knex('users').insert(
         {
@@ -12,5 +12,8 @@ exports.seed = function(knex, Promise) {
           hashed_password: 'beer123'
         }
       );
+    })
+    .then(() => {
+       return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));");
     });
 };

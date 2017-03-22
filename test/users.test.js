@@ -11,10 +11,28 @@ const server = require('../app');
 
 
 suite('User tests', (done) => {
-  test('POST /users', (done) => {
+  before((done) => {
+  knex.migrate.latest()
+    .then(() => {
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });
+  });
 
+  beforeEach((done) => {
+    knex.seed.run()
+      .then(() => {
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  test('POST /users', (done) => {
     const password = 'LebronSux';
-    
     request(server)
       .post('/users')
       .set('Accept', 'application/json')
@@ -38,9 +56,9 @@ suite('User tests', (done) => {
           return done(httpErr);
         }
         knex('users')
-        where('id', 2)
-        first()
-        then((user) => {
+        .where('id', 2)
+        .first()
+        .then((user) => {
           const hashedPassword = user.hashed_password;
 
           delete user.hashed_password;
