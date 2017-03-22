@@ -2,7 +2,7 @@
 
 const { suite, test } = require('mocha');
 const request = require('supertest');
-const server = require('../server');
+const server = require('../app');
 
 suite('Connection with Brewerydb test', () => {
 

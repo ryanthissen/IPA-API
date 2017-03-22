@@ -6,25 +6,30 @@ const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const bcrypt = require('bcrypt');
 const request = require('supertest');
-// const knex = require('../knex');
-const server = require('../server');
+const knex = require('../knex');
+const server = require('../app');
 
 
 suite('User tests', (done) => {
   test('POST /users', (done) => {
+
+    const password = 'LebronSux';
+    
     request(server)
       .post('/users')
       .set('Accept', 'application/json')
       .send({
-        firstName: 'Steph',
-        lastName: 'Curry',
+        first_name: 'Steph',
+        last_name: 'Curry',
+        user_name: 'Threesus',
         email: 'Threesus@gmail.com',
-        password: 'LebronSux'
+        password,
       })
       .expect(200, {
-        id: 3,
-        firstName: 'Steph',
-        lastName: 'Curry',
+        id: 2,
+        first_name: 'Steph',
+        last_name: 'Curry',
+        user_name: 'Threesus',
         email: 'Threesus@gmail.com'
       })
       .expect('Content-Type', /json/)
@@ -32,11 +37,30 @@ suite('User tests', (done) => {
         if (httpErr) {
           return done(httpErr);
         }
-        done
-      });
+        knex('users')
+        where('id', 2)
+        first()
+        then((user) => {
+          const hashedPassword = user.hashed_password;
 
+          delete user.hashed_password;
+          delete user.created_at;
+          delete user.updated_at;
 
-      //add to database here
+          assert.deepEqual(user, {
+            id: 2,
+            first_name: 'Steph',
+            last_name: 'Curry',
+            user_name: 'Threesus',
+            email: 'Threesus@gmail'
+          });
 
+          // eslint-disable-next-line no-sync
+          const isMatch = bcrypt.compareSync(password, hashedPassword);
+
+          assert.isTrue(isMatch, "passwords don't match");
+          done();
+        });
+    });
   });
-})
+});
