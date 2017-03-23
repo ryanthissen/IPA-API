@@ -279,9 +279,17 @@ definitions:
   AddFavoriteRequest:
     type: object
     required:
+      - rating
+      - comment
       - user_id
       - beer_id
     properties:
+      rating:
+        type: string
+        description: The users chosen rating of the beer(1-5)
+      comment:
+        type: string
+        description: The users comment about the beer
       user_id:
         type: string
         description: user id of client adding new favorite
@@ -291,9 +299,17 @@ definitions:
   AddFavoriteResponse:
     type: object
     required:
+      - rating
+      - comment
       - beer_name
       - label_url
     properties:
+      rating:
+        type: string
+        description: The users chosen rating of the beer(1-5)
+      comment:
+        type: string
+        description: The users comment about the beer
       beer_name:
         type: string
       label_url:
@@ -376,30 +392,28 @@ definitions:
       beer_id:
         type: string
   SearchBeer:
-    type: object
     required:
-      - id
-      - name
-      - abv
-      - ibu
-      - label_url
-      - description
-      - type_name
+      - beers
     properties:
-      id:
-        type: string
-      name:
-        type: string
-      abv:
-        type: string
-      ibu:
-        type: string
-      label_url:
-        type: string
-      description:
-        type: string
-      type_name:
-        type: string
+      beers:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            abv:
+              type: string
+            ibu:
+              type: string
+            label_url:
+              type: string
+            description:
+              type: string
+            type_name:
+              type: string
   # Cookie:
   #   type: header
   #   properties:

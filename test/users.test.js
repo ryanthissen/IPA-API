@@ -15,16 +15,16 @@ const server = require('../app');
 suite('User tests', (done) => {
   before((done) => {
     knex.migrate.rollback()
-      .then(() => {
-        return knex.migrate.latest()
+    .then(() => {
+      return knex.migrate.latest()
 
-      })
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
+    })
+    .then(() => {
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });
   });
 
   beforeEach((done) => {
