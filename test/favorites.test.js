@@ -7,6 +7,7 @@ const {
 } = require('mocha');
 
 describe('Favorites routes', function() {
+
   describe('GET /favorites', function() {
 
     it('should respond with a status code of 200', function(done) {

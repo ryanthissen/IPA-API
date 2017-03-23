@@ -37,6 +37,27 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /beers:
+      x-swagger-router-controller: beers
+      post:
+        description: Creates new account
+        operationId: addBeer
+        parameters:
+          - name: user
+            in: body
+            description: user to add to the database
+            required: true
+            schema:
+              $ref: '#/definitions/AddBeerRequest'
+        responses:
+          "200":
+            description: Success
+            schema:
+              $ref: "#/definitions/AddBeerResponse"
+          default:
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
   /favorites:
     x-swagger-router-controller: favorites
     get:
@@ -263,6 +284,56 @@ definitions:
       email:
         type: string
         description: email
+  AddBeerRequest:
+      type: object
+      required:
+        - id
+        - beer_name
+        - abv
+        - ibu
+        - label_url
+        - description
+        - type_name
+      properties:
+        id:
+          type: string
+        beer_name:
+          type: string
+        abv:
+          type: string
+        ibu:
+          type: string
+        label_url:
+          type: string
+        description:
+          type: string
+        type_name:
+          type: string
+  AddBeerResponse:
+      type: object
+      required:
+        - id
+        - beer_name
+        - abv
+        - ibu
+        - label_url
+        - description
+        - type_name
+      properties:
+        id:
+          type: string
+        beer_name:
+          type: string
+        abv:
+          type: string
+        ibu:
+          type: string
+        label_url:
+          type: string
+        description:
+          type: string
+        type_name:
+          type: string
   FavoritesResponse:
     required:
       - beers
