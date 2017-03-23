@@ -6,8 +6,10 @@ const {
   test
 } = require('mocha');
 const knex = require('../knex');
+process.env.NODE_ENV = 'test';
 
 describe('Favorites routes', function() {
+
 
   describe('GET /favorites', function() {
 
@@ -35,22 +37,6 @@ describe('Favorites routes', function() {
   })
 
   describe('POST /favorites', function() {
-
-    beforeEach((done) => {
-      knex.migrate.rollback()
-        .then(() => {
-          return knex.migrate.latest();
-        })
-        .then(() => {
-          return knex.seed.run();
-        })
-        .then(() => {
-          done();
-        })
-        .catch((err) => {
-          done(err);
-        });
-    });
 
     it('should respond with a status code of 200', function(done) {
       request(app)
@@ -98,7 +84,7 @@ describe('Favorites routes', function() {
 
   describe('DELETE /favorites', function() {
 
-    it('Should delete a favorite from the route and respond with 200', function(done) {
+    it('Should delete a favorite from the route, respond with 200', function(done) {
       request(app)
         .del('/favorites?id=1')
         .expect('Content-Type', /json/)
@@ -108,4 +94,4 @@ describe('Favorites routes', function() {
         }, done)
     });
   });
-})
+});

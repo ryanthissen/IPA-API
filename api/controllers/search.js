@@ -10,9 +10,6 @@ module.exports.searchBeer = function searchBeer(req, res, next) {
     return res.json();
   })
   .then((json) => {
-    // if (!('totalResults' in json)) {
-    //   res.status(200).send(respBeer);
-    // }
     let beerArray = json.data.slice(0, 25);
     let respArray = [];
     beerArray.map((x) => {
