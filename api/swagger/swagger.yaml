@@ -61,12 +61,16 @@ paths:
       description: Adds a new beer to a clients list of favorites
       operationId: addFavorite
       parameters:
-        - name: user
-          in: body
-          description: information on new favorite beer
+        - name: user_id
+          in: query
+          description: the user id of the client
           required: true
-          schema:
-            $ref: "#/definitions/AddFavoriteRequest"
+          type: string
+        - name: beer_id
+          in: query
+          description: the brewerydb id of the favorite beer
+          required: true
+          type: string
       responses:
         "200":
           description: Success
@@ -276,38 +280,15 @@ definitions:
               type: string
             label_url:
               type: string
-  AddFavoriteRequest:
-    type: object
-    required:
-      - beer_id
-    properties:
-      beer_id:
-        type: string
-        description: id of new favorite beer
   AddFavoriteResponse:
     type: object
     required:
-      - id
       - beer_name
-      - abv
-      - ibu
       - label_url
-      - description
-      - type_name
     properties:
-      id:
-        type: string
       beer_name:
         type: string
-      abv:
-        type: string
-      ibu:
-        type: string
       label_url:
-        type: string
-      description:
-        type: string
-      type_name:
         type: string
   DeleteFavoriteBeer:
     type: object

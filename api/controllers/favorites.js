@@ -1,18 +1,26 @@
 'use strict';
 
-var url = require('url');
+const url = require('url');
+const env = process.env.NODE_ENV || 'development';
+const config = require('../../knexfile.js')[env];
+const knex = require('knex')(config);
 
-var Default = require('./DefaultService');
 
 module.exports.returnFavorites = function returnFavorites(req, res, next) {
-  // Default.returnFavorites(req.swagger.params, res, next);
-  console.log('worked');
-  res.set('Content-Type', 'application/json')
-  res.status(200).json([]);
+  knex('user_beers')
+    .innerJoin('beers', 'user_beers.beer_id', 'beers.id')
+    .where('user_id', req.query.user_id)
+    .select('name', 'label_url')
+    .then((favorites) => {
+      res.set('Content-Type', 'application/json')
+      res.status(200).json(favorites);
+    })
 };
 
 module.exports.addFavorite = function addFavorite(req, res, next) {
-  Default.addFavorite(req.swagger.params, res, next);
+  // knex()
+  res.set('Content-Type', 'application/json')
+  res.status(200).json();
 };
 
 module.exports.deleteFromFavorites = function deleteFromFavorites(req, res, next) {
