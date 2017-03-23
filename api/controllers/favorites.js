@@ -19,8 +19,12 @@ module.exports.returnFavorites = function returnFavorites(req, res, next) {
 
 module.exports.addFavorite = function addFavorite(req, res, next) {
   // knex()
+  console.log('inside addFavorite');
   res.set('Content-Type', 'application/json')
-  res.status(200).json();
+  res.status(200).json({
+    beer_name: 'duff',
+    label_url: 'www.google.com'
+  });
 };
 
 module.exports.deleteFromFavorites = function deleteFromFavorites(req, res, next) {
