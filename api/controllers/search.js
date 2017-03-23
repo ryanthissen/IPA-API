@@ -30,6 +30,7 @@ module.exports.searchBeer = function searchBeer(req, res, next) {
       beerObj.type_name = x.style.shortName,
       respArray.push(beerObj);
     })
+    console.log(respArray);
     res.status(200).send(respArray);
   })
   .catch((err) => {

@@ -37,6 +37,27 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /beers:
+      x-swagger-router-controller: beers
+      post:
+        description: Creates new account
+        operationId: addBeer
+        parameters:
+          - name: user
+            in: body
+            description: user to add to the database
+            required: true
+            schema:
+              $ref: '#/definitions/AddBeerRequest'
+        responses:
+          "200":
+            description: Success
+            schema:
+              $ref: "#/definitions/AddBeerResponse"
+          default:
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
   /favorites:
     x-swagger-router-controller: favorites
     get:
@@ -263,6 +284,59 @@ definitions:
       email:
         type: string
         description: email
+  AddBeerRequest:
+      type: object
+      required:
+        - bdb_id
+        - name
+        - abv
+        - ibu
+        - label_url
+        - description
+        - type_name
+      properties:
+        bdb_id:
+          type: string
+        name:
+          type: string
+        abv:
+          type: string
+        ibu:
+          type: string
+        label_url:
+          type: string
+        description:
+          type: string
+        type_name:
+          type: string
+  AddBeerResponse:
+      type: object
+      required:
+        - id
+        - bdb_id
+        - name
+        - abv
+        - ibu
+        - label_url
+        - description
+        - type_name
+      properties:
+        id:
+          type: integer
+        bdb_id:
+          type: string
+        name:
+          type: string
+        abv:
+          type: integer
+        ibu:
+          type: integer
+        label_url:
+          type: string
+        description:
+          type: string
+        type_name:
+          type: string
   FavoritesResponse:
     required:
       - beers
@@ -285,35 +359,37 @@ definitions:
       - beer_id
     properties:
       rating:
-        type: string
+        type: integer
         description: The users chosen rating of the beer(1-5)
       comment:
         type: string
         description: The users comment about the beer
       user_id:
-        type: string
+        type: integer
         description: user id of client adding new favorite
       beer_id:
-        type: string
-        description: brewerydb id of new favorite
+        type: integer
+        description: serial id of beers table for new favorite
   AddFavoriteResponse:
     type: object
     required:
       - rating
       - comment
-      - beer_name
-      - label_url
+      - user_id
+      - beer_id
     properties:
       rating:
-        type: string
+        type: integer
         description: The users chosen rating of the beer(1-5)
       comment:
         type: string
         description: The users comment about the beer
-      beer_name:
-        type: string
-      label_url:
-        type: string
+      user_id:
+        type: integer
+        description: user id of client adding new favorite
+      beer_id:
+        type: integer
+        description: serial id of beers table for new favorite
   DeleteFavoriteBeer:
     type: object
     required:

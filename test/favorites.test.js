@@ -7,6 +7,7 @@ const {
 } = require('mocha');
 
 describe('Favorites routes', function() {
+
   describe('GET /favorites', function() {
 
     it('should respond with a status code of 200', function(done) {
@@ -31,26 +32,22 @@ describe('Favorites routes', function() {
 
   describe('POST /favorites', function() {
 
-    // it('should respond with a status code of 200', function(done) {
-    //   request(app)
-    //     .post('/favorites')
-    //     .send({
-    //       rating: '4',
-    //       comment: 'This beer was aight',
-    //       user_id: 'hello',
-    //       beer_id: 'boo',
-    //     })
-    //     .expect(200, done)
-    // })
-    it('should respond with content type application/json', function(done) {
+    it('should respond with a status code of 200', function(done) {
       request(app)
         .post('/favorites')
         .send({
-          rating: '4',
+          rating: 4,
           comment: 'This beer was aight',
-          user_id: 'hello',
-          beer_id: 'boo',
+          user_id: 1,
+          beer_id: 2,
         })
+        .expect(200, done)
+    })
+    
+    it('should respond with content type application/json', function(done) {
+      request(app)
+        .post('/favorites')
+        .send()
         .expect('Content-Type', /json/, done)
     })
     it('should respond with a status code of 400 with incomplete body', function(done) {
@@ -65,16 +62,16 @@ describe('Favorites routes', function() {
       request(app)
         .post('/favorites')
         .send({
-          rating: '4',
+          rating: 4,
           comment: 'This beer was aight',
-          user_id: '1',
-          beer_id: '1',
+          user_id: 1,
+          beer_id: 2,
         })
         .expect(200, {
-          rating: '4',
+          rating: 4,
           comment: 'This beer was aight',
-          name: "Stone IPA",
-          label_url: "https://s3.amazonaws.com/brewerydbapi/beer/PAM6wX/upload_dl9pJu-medium.png",
+          user_id: 1,
+          beer_id: 2,
         }, done)
     })
 
