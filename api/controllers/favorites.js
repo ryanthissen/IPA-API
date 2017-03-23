@@ -17,15 +17,15 @@ module.exports.returnFavorites = function returnFavorites(req, res, next) {
     })
 };
 
-console.log('before post');
 module.exports.addFavorite = function addFavorite(req, res, next) {
-  console.log('after post');
-  // knex()
-  let resp = {}
-  resp.beer_name = 'Lagunitas',
-  resp.label_url = 'url',
-  res.set('Content-Type', 'application/json')
-  res.status(200).json(resp);
+  // knex('beers')
+  // .insert()
+  //
+  // let resp = {}
+  // resp.beer_name =
+  // resp.label_url =
+  // res.set('Content-Type', 'application/json')
+  // res.status(200).json(resp);
 };
 
 module.exports.deleteFromFavorites = function deleteFromFavorites(req, res, next) {

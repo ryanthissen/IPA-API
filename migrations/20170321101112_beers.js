@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('beers', (table) => {
     table.increments();
-    table.string('bdb_id').notNullable().defaultTo('');
+    table.string('bdb_id').notNullable().defaultTo('').unique();
     table.string('name').notNullable().defaultTo('');
     table.float('abv').notNullable().defaultTo(5.0);
     table.integer('ibu').notNullable().defaultTo(70);

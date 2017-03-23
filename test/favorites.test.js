@@ -33,8 +33,10 @@ describe('Favorites routes', function() {
 
     it('should respond with a status code of 200', function(done) {
       request(app)
-        .post('/favorites?user_id=1&beer_id=PAM6wX')
+        .post('/favorites')
         .send({
+          rating: '4',
+          comment: 'This beer was aight',
           user_id: 'hello',
           beer_id: 'boo',
         })
@@ -44,6 +46,8 @@ describe('Favorites routes', function() {
       request(app)
         .post('/favorites')
         .send({
+          rating: '4',
+          comment: 'This beer was aight',
           user_id: 'hello',
           beer_id: 'boo',
         })
@@ -61,6 +65,8 @@ describe('Favorites routes', function() {
       request(app)
         .post('/favorites')
         .send({
+          rating: '4',
+          comment: 'This beer was aight',
           user_id: '1',
           beer_id: '1',
         })

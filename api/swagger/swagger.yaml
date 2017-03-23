@@ -384,30 +384,28 @@ definitions:
       beer_id:
         type: string
   SearchBeer:
-    type: object
     required:
-      - id
-      - name
-      - abv
-      - ibu
-      - label_url
-      - description
-      - type_name
+      - beers
     properties:
-      id:
-        type: string
-      name:
-        type: string
-      abv:
-        type: string
-      ibu:
-        type: string
-      label_url:
-        type: string
-      description:
-        type: string
-      type_name:
-        type: string
+      beers:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            abv:
+              type: string
+            ibu:
+              type: string
+            label_url:
+              type: string
+            description:
+              type: string
+            type_name:
+              type: string
   # Cookie:
   #   type: header
   #   properties:

@@ -13,16 +13,25 @@ module.exports.searchBeer = function searchBeer(req, res, next) {
     // if (!('totalResults' in json)) {
     //   res.status(200).send(respBeer);
     // }
-    let firstBeer = json.data[0];
-    let respBeer = {}
-    respBeer.id = firstBeer.id,
-    respBeer.name = firstBeer.name,
-    respBeer.abv = firstBeer.abv,
-    respBeer.ibu = firstBeer.ibu,
-    respBeer.label_url = firstBeer.labels.medium,
-    respBeer.description = firstBeer.description,
-    respBeer.type_name = firstBeer.style.shortName,
-    res.status(200).send(respBeer);
+    let beerArray = json.data.slice(0, 25);
+    let respArray = [];
+    beerArray.map((x) => {
+      let beerObj = {}
+      beerObj.id = x.id;
+      beerObj.name = x.name;
+      beerObj.abv = x.abv;
+      beerObj.ibu = x.ibu;
+      if (x.labels === undefined) {
+        beerObj.label_url = 'http://png-4.vector.me/files/images/6/6/668633/duff_beer_thumb.png';
+      } else {
+        beerObj.label_url = x.labels.medium;
+      }
+      beerObj.description = x.description,
+      beerObj.type_name = x.style.shortName,
+      respArray.push(beerObj);
+    })
+    console.log(respArray);
+    res.status(200).send(respArray);
   })
   .catch((err) => {
     console.log(err);
