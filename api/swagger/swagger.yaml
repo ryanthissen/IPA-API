@@ -279,9 +279,17 @@ definitions:
   AddFavoriteRequest:
     type: object
     required:
+      - rating
+      - comment
       - user_id
       - beer_id
     properties:
+      rating:
+        type: string
+        description: The users chosen rating of the beer(1-5)
+      comment:
+        type: string
+        description: The users comment about the beer
       user_id:
         type: string
         description: user id of client adding new favorite

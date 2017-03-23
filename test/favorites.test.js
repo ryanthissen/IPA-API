@@ -34,12 +34,40 @@ describe('Favorites routes', function() {
     it('should respond with a status code of 200', function(done) {
       request(app)
         .post('/favorites?user_id=1&beer_id=PAM6wX')
+        .send({
+          user_id: 'hello',
+          beer_id: 'boo',
+        })
         .expect(200, done)
     })
     it('should respond with content type application/json', function(done) {
       request(app)
-        .post('/favorites?user_id=1&beer_id=PAM6wX')
+        .post('/favorites')
+        .send({
+          user_id: 'hello',
+          beer_id: 'boo',
+        })
         .expect('Content-Type', /json/, done)
+    })
+    it('should respond with a status code of 400 with incomplete body', function(done) {
+      request(app)
+        .post('/favorites')
+        .send({
+          user_id: 'hello',
+        })
+        .expect(400, done)
+    })
+    it('should return beer name and label url with a proper beer and user id', function(done) {
+      request(app)
+        .post('/favorites')
+        .send({
+          user_id: '1',
+          beer_id: '1',
+        })
+        .expect(200, {
+          name: "Stone IPA",
+          label_url: "https://s3.amazonaws.com/brewerydbapi/beer/PAM6wX/upload_dl9pJu-medium.png",
+        },done)
     })
 
   })

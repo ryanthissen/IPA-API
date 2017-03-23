@@ -10,9 +10,9 @@ module.exports.searchBeer = function searchBeer(req, res, next) {
     return res.json();
   })
   .then((json) => {
-    if (!('totalResults' in json)) {
-      res.status(200).send(respBeer);
-    }
+    // if (!('totalResults' in json)) {
+    //   res.status(200).send(respBeer);
+    // }
     let firstBeer = json.data[0];
     let respBeer = {}
     respBeer.id = firstBeer.id,
