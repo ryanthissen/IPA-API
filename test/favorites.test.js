@@ -24,6 +24,9 @@ describe('Favorites routes', function() {
       request(app)
         .get('/favorites?user_id=1')
         .expect([{
+          id: 1,
+          rating: 5,
+          comment: 'this beer drinks pretty good',
           name: "Stone IPA",
           label_url: "https://s3.amazonaws.com/brewerydbapi/beer/PAM6wX/upload_dl9pJu-medium.png",
         }], done)
@@ -43,7 +46,7 @@ describe('Favorites routes', function() {
         })
         .expect(200, done)
     })
-    
+
     it('should respond with content type application/json', function(done) {
       request(app)
         .post('/favorites')

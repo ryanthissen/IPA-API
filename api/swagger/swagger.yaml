@@ -73,7 +73,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/FavoritesResponse"
+            $ref: "#/definitions/GetFavoritesResponse"
         default:
           description: Error
           schema:
@@ -102,15 +102,15 @@ paths:
       operationId: deleteFromFavorites
       parameters:
         - name: id
-          description: beer id
-          type: string
+          description: user_beers id
+          type: integer
           in: query
           required: true
       responses:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/DeleteFavoriteBeer"
+            $ref: "#/definitions/DeleteFavoriteBeerResponse"
         default:
           description: Error
           schema:
@@ -177,9 +177,9 @@ paths:
       description: delete a beer from client's wishlist
       operationId: deleteFromWishlist
       parameters:
-        - name: beer_id
-          description: beer id
-          type: string
+        - name: wishlist_id
+          description: id in user_wishlist table
+          type: integer
           in: query
           required: true
       responses:
@@ -337,7 +337,7 @@ definitions:
           type: string
         type_name:
           type: string
-  FavoritesResponse:
+  GetFavoritesResponse:
     required:
       - beers
     properties:
@@ -346,10 +346,21 @@ definitions:
         items:
           type: object
           properties:
+            rating:
+              type: integer
+              description: beer rating
+            id:
+              type: integer
+              description: the users_beers id
+            comment:
+              type: string
+              description: the users comment on the beer
             name:
               type: string
+              description: the beers name
             label_url:
               type: string
+              description: the label url
   AddFavoriteRequest:
     type: object
     required:
@@ -390,12 +401,16 @@ definitions:
       beer_id:
         type: integer
         description: serial id of beers table for new favorite
-  DeleteFavoriteBeer:
+  DeleteFavoriteBeerResponse:
     type: object
     required:
-      - beer_name
+      - id
+      - name
     properties:
-      beer_name:
+      id:
+        type: integer
+        description: serial id of favorite deleted
+      name:
         type: string
   SpecificFavoriteBeer:
     type: object

@@ -10,7 +10,7 @@ module.exports.returnFavorites = function returnFavorites(req, res, next) {
   knex('user_beers')
     .innerJoin('beers', 'user_beers.beer_id', 'beers.id')
     .where('user_id', req.query.user_id)
-    .select('name', 'label_url')
+    .select('user_beers.id', 'rating', 'comment', 'name', 'label_url')
     .then((favorites) => {
       res.set('Content-Type', 'application/json')
       res.status(200).json(favorites);
@@ -38,5 +38,20 @@ module.exports.addFavorite = function addFavorite(req, res, next) {
 };
 
 module.exports.deleteFromFavorites = function deleteFromFavorites(req, res, next) {
-  res.send(200);
+  let beer;
+  knex('user_beers')
+  .innerJoin('beers', 'user_beers.beer_id', 'beers.id')
+  .select('name', 'user_beers.id')
+  .where('user_beers.id', req.query.id)
+  .then((result) => {
+    beer = result[0];
+    console.log(beer);
+    return knex('user_beers')
+    .del()
+    .where('id', req.query.id)
+  })
+  .then((result) => {
+    res.set('Content-Type', 'application/json');
+    res.status(200).send(beer);
+  });
 };
