@@ -31,17 +31,17 @@ describe('Favorites routes', function() {
 
   describe('POST /favorites', function() {
 
-    it('should respond with a status code of 200', function(done) {
-      request(app)
-        .post('/favorites')
-        .send({
-          rating: '4',
-          comment: 'This beer was aight',
-          user_id: 'hello',
-          beer_id: 'boo',
-        })
-        .expect(200, done)
-    })
+    // it('should respond with a status code of 200', function(done) {
+    //   request(app)
+    //     .post('/favorites')
+    //     .send({
+    //       rating: '4',
+    //       comment: 'This beer was aight',
+    //       user_id: 'hello',
+    //       beer_id: 'boo',
+    //     })
+    //     .expect(200, done)
+    // })
     it('should respond with content type application/json', function(done) {
       request(app)
         .post('/favorites')
@@ -61,7 +61,7 @@ describe('Favorites routes', function() {
         })
         .expect(400, done)
     })
-    it('should return beer name and label url with a proper beer and user id', function(done) {
+    it('should return beer name and label url and rating and comment with a proper beer and user id', function(done) {
       request(app)
         .post('/favorites')
         .send({
@@ -71,9 +71,11 @@ describe('Favorites routes', function() {
           beer_id: '1',
         })
         .expect(200, {
+          rating: '4',
+          comment: 'This beer was aight',
           name: "Stone IPA",
           label_url: "https://s3.amazonaws.com/brewerydbapi/beer/PAM6wX/upload_dl9pJu-medium.png",
-        },done)
+        }, done)
     })
 
   })

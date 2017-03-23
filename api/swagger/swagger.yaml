@@ -299,9 +299,17 @@ definitions:
   AddFavoriteResponse:
     type: object
     required:
+      - rating
+      - comment
       - beer_name
       - label_url
     properties:
+      rating:
+        type: string
+        description: The users chosen rating of the beer(1-5)
+      comment:
+        type: string
+        description: The users comment about the beer
       beer_name:
         type: string
       label_url:
