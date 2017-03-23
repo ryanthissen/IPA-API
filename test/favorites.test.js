@@ -14,7 +14,7 @@ describe('Favorites routes', function() {
         .get('/favorites?user_id=1')
         .expect(200, done)
     })
-    it('should respond with content type applicaiton/json', function(done) {
+    it('should respond with content type application/json', function(done) {
       request(app)
         .get('/favorites?user_id=1')
         .expect('Content-Type', /json/, done)
@@ -33,12 +33,12 @@ describe('Favorites routes', function() {
 
     it('should respond with a status code of 200', function(done) {
       request(app)
-        .post('/favorites?user_id=1')
+        .post('/favorites?user_id=1&beer_id=PAM6wX')
         .expect(200, done)
     })
-    it('should respond with content type applicaiton/json', function(done) {
+    it('should respond with content type application/json', function(done) {
       request(app)
-        .post('/favorites?user_id=1')
+        .post('/favorites?user_id=1&beer_id=PAM6wX')
         .expect('Content-Type', /json/, done)
     })
 

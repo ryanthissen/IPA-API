@@ -12,14 +12,15 @@ module.exports.returnFavorites = function returnFavorites(req, res, next) {
     .where('user_id', req.query.user_id)
     .select('name', 'label_url')
     .then((favorites) => {
-      console.log(favorites);
       res.set('Content-Type', 'application/json')
       res.status(200).json(favorites);
     })
 };
 
 module.exports.addFavorite = function addFavorite(req, res, next) {
-
+  // knex()
+  res.set('Content-Type', 'application/json')
+  res.status(200).json();
 };
 
 module.exports.deleteFromFavorites = function deleteFromFavorites(req, res, next) {
