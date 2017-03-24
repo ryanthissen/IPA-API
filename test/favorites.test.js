@@ -11,21 +11,21 @@ process.env.NODE_ENV = 'test';
 describe('Favorites routes', function() {
 
 
-  describe('GET /favorites', function() {
+  describe('GET /ipa-api/favorites', function() {
 
     it('should respond with a status code of 200', function(done) {
       request(app)
-        .get('/favorites?user_id=1')
+        .get('/ipa-api/favorites?user_id=1')
         .expect(200, done)
     })
     it('should respond with content type application/json', function(done) {
       request(app)
-        .get('/favorites?user_id=1')
+        .get('/ipa-api/favorites?user_id=1')
         .expect('Content-Type', /json/, done)
     })
     it('should return the beer names and beer label urls from the list of users favorite beers', function(done) {
       request(app)
-        .get('/favorites?user_id=1')
+        .get('/ipa-api/favorites?user_id=1')
         .expect([{
             id: 1,
             rating: 5,
@@ -51,11 +51,11 @@ describe('Favorites routes', function() {
     })
   })
 
-  describe('POST /favorites', function() {
+  describe('POST /ipa-api/favorites', function() {
 
     it('should respond with a status code of 200', function(done) {
       request(app)
-        .post('/favorites')
+        .post('/ipa-api/favorites')
         .send({
           rating: 4,
           comment: 'This beer was aight',
@@ -67,13 +67,13 @@ describe('Favorites routes', function() {
 
     it('should respond with content type application/json', function(done) {
       request(app)
-        .post('/favorites')
+        .post('/ipa-api/favorites')
         .send()
         .expect('Content-Type', /json/, done)
     })
     it('should respond with a status code of 400 with incomplete body', function(done) {
       request(app)
-        .post('/favorites')
+        .post('/ipa-api/favorites')
         .send({
           user_id: 'hello',
         })
@@ -81,7 +81,7 @@ describe('Favorites routes', function() {
     })
     it('should return beer name and label url and rating and comment with a proper beer and user id', function(done) {
       request(app)
-        .post('/favorites')
+        .post('/ipa-api/favorites')
         .send({
           rating: 4,
           comment: 'This beer was aight',
@@ -97,11 +97,11 @@ describe('Favorites routes', function() {
     });
   });
 
-  describe('DELETE /favorites', function() {
+  describe('DELETE /ipa-api/favorites', function() {
 
     it('Should delete a favorite from the route, respond with 200', function(done) {
       request(app)
-        .del('/favorites?id=1')
+        .del('/ipa-api/favorites?id=1')
         .expect('Content-Type', /json/)
         .expect(200, {
           "name": "Stone IPA",
