@@ -15,16 +15,16 @@ const server = require('../app');
 suite('User tests', (done) => {
   before((done) => {
     knex.migrate.rollback()
-    .then(() => {
-      return knex.migrate.latest()
+      .then(() => {
+        return knex.migrate.latest()
 
-    })
-    .then(() => {
-      done();
-    })
-    .catch((err) => {
-      done(err);
-    });
+      })
+      .then(() => {
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
   });
 
   beforeEach((done) => {
@@ -57,12 +57,11 @@ suite('User tests', (done) => {
       })
       .expect('Content-Type', /json/)
       .expect(200, {
-        id: 2,
+        id: 6,
         first_name: 'Steph',
         last_name: 'Curry',
         username: 'Threesus',
         email: 'Threesus@gmail.com',
-        token: 'poo',
       }, done);
   });
 });

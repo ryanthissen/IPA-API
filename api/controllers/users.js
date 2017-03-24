@@ -19,7 +19,7 @@ module.exports.createAccount = function createAccount(req, res, next) {
   //   res.set('Content-Type', 'text/plain');
   //   res.status(400).send('Must provide a username');
   // } else {
-    bcrypt.hash(req.body.password, 12)
+  bcrypt.hash(req.body.password, 12)
     .then((hashed_password) => {
       return knex('users').insert({
         first_name: req.body.first_name,
@@ -38,7 +38,7 @@ module.exports.createAccount = function createAccount(req, res, next) {
       // const token = jwt.sign(claim, process.env.JWT_KEY, {
       //   expiresIn: '7 days',
       // });
-      user.token = 'poo';
+      // user.token = 'dunks';
       res.status(200).send(user);
     })
     .catch((err) => {

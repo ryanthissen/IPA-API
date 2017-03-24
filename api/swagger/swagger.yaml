@@ -207,15 +207,15 @@ definitions:
   CreateUserSuccess:
     type: object
     required:
-      - token
+      # - token
       - first_name
       - last_name
       - username
       - email
     properties:
-      token:
-        type: string
-        description: jwt token
+      # token:
+      #   type: string
+      #   description: jwt token
       first_name:
         type: string
         description: first name of new user

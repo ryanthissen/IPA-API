@@ -27,12 +27,27 @@ describe('Favorites routes', function() {
       request(app)
         .get('/favorites?user_id=1')
         .expect([{
-          id: 1,
-          rating: 5,
-          comment: 'this beer drinks pretty good',
-          name: "Stone IPA",
-          label_url: "https://s3.amazonaws.com/brewerydbapi/beer/PAM6wX/upload_dl9pJu-medium.png",
-        }], done)
+            id: 1,
+            rating: 5,
+            comment: 'this beer drinks pretty good',
+            name: "Stone IPA",
+            label_url: "https://s3.amazonaws.com/brewerydbapi/beer/PAM6wX/upload_dl9pJu-medium.png",
+          },
+          {
+            id: 2,
+            rating: 3,
+            comment: 'pretty good.  nice finish.',
+            name: "Total Domination",
+            label_url: "https://s3.amazonaws.com/brewerydbapi/beer/infeFI/upload_taTKTO-medium.png",
+          },
+          {
+            id: 3,
+            rating: 5,
+            comment: 'love it.  best beer ever!!',
+            name: "Racer 5 IPA",
+            label_url: "https://s3.amazonaws.com/brewerydbapi/beer/o1OELJ/upload_G4iiCw-medium.png",
+          },
+        ], done)
     })
   })
 
@@ -44,7 +59,7 @@ describe('Favorites routes', function() {
         .send({
           rating: 4,
           comment: 'This beer was aight',
-          user_id: 1,
+          user_id: 2,
           beer_id: 2,
         })
         .expect(200, done)
@@ -70,13 +85,13 @@ describe('Favorites routes', function() {
         .send({
           rating: 4,
           comment: 'This beer was aight',
-          user_id: 1,
+          user_id: 2,
           beer_id: 2,
         })
         .expect(200, {
           rating: 4,
           comment: 'This beer was aight',
-          user_id: 1,
+          user_id: 2,
           beer_id: 2,
         }, done)
     });
