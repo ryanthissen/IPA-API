@@ -10,7 +10,7 @@ basePath: /ipa-api
 schemes:
   # tip: remove http to make production-grade
   - http
-  - https
+  # - https
 consumes:
   - application/json
 produces:
