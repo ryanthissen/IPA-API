@@ -410,16 +410,6 @@ definitions:
               type: string
             type_name:
               type: string
-  # Cookie:
-  #   type: header
-  #   properties:
-  #     token:
-  #       type: int64
-  #       description: cookie token
-  # Authenticated:
-  #   properties:
-  #     message:
-  #       type: boolean
   ErrorResponse:
     required:
       - message
