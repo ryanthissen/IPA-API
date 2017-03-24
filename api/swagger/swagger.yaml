@@ -135,62 +135,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /wishlist:
-    x-swagger-router-controller: wishlist
-    get:
-      description: Returns all elements on a client's wishlist
-      operationId: returnWishlist
-      parameters:
-        - name: user_id
-          in: query
-          description: the wishlist beers of the client
-          required: true
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/WishlistResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-    post:
-      description: Adds a new beer to a client's wishlist
-      operationId: addToWishlist
-      parameters:
-        - name: beer_id
-          in: query
-          description: the beer client wants to add to wishlist
-          required: true
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/AddToWishlistResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-    delete:
-      description: delete a beer from client's wishlist
-      operationId: deleteFromWishlist
-      parameters:
-        - name: wishlist_id
-          description: id in user_wishlist table
-          type: integer
-          in: query
-          required: true
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/DeleteWishlistBeer"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
   /search:
     x-swagger-router-controller: search
     get:
@@ -442,51 +386,6 @@ definitions:
       rating:
         type: integer
       comment:
-        type: string
-  WishlistResponse:
-    required:
-      - beers
-    properties:
-      beers:
-        type: array
-        items:
-          type: object
-          properties:
-            name:
-              type: string
-            label_url:
-              type: string
-  AddToWishlistResponse:
-    type: object
-    required:
-      - id
-      - beer_name
-      - abv
-      - ibu
-      - label_url
-      - description
-      - type_name
-    properties:
-      id:
-        type: string
-      beer_name:
-        type: string
-      abv:
-        type: string
-      ibu:
-        type: string
-      label_url:
-        type: string
-      description:
-        type: string
-      type_name:
-        type: string
-  DeleteWishlistBeer:
-    type: object
-    required:
-      - beer_id
-    properties:
-      beer_id:
         type: string
   SearchBeer:
     required:

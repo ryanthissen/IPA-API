@@ -45,7 +45,6 @@ module.exports.deleteFromFavorites = function deleteFromFavorites(req, res, next
   .where('user_beers.id', req.query.id)
   .then((result) => {
     beer = result[0];
-    console.log(beer);
     return knex('user_beers')
     .del()
     .where('id', req.query.id)
