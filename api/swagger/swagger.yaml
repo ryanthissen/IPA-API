@@ -3,9 +3,9 @@ info:
   version: "0.0.1"
   title: IPA-API
 # during dev, should point to your local machine
-host: localhost:10010
+host: matt-ryan-ipa-api.herokuapp.com
 # basePath prefixes all resource paths
-basePath: /
+basePath: /ipa-api
 #
 schemes:
   # tip: remove http to make production-grade
