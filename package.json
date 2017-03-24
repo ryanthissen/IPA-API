@@ -33,7 +33,8 @@
     "supertest": "^1.0.0"
   },
   "scripts": {
-    "start": "node app.js",
+    "heroku-postbuild": "knex migrate:latest",
+    "start": "nodemon app.js",
     "edit": "swagger project edit",
     "test": "mocha"
   }
