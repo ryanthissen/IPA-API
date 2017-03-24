@@ -40,13 +40,13 @@ paths:
   /beers:
       x-swagger-router-controller: beers
       post:
-        description: Creates new account
+        description: Adds a beer to the database
         operationId: addBeer
         parameters:
-          - name: user
+          - name: beer
             in: body
-            description: user to add to the database
-            required: true
+            description: beer to add to the database
+            required: false
             schema:
               $ref: '#/definitions/AddBeerRequest'
         responses:
@@ -121,7 +121,7 @@ paths:
       description: returns more detailed information about a specific favorite beer
       operationId: specificFavorite
       parameters:
-        - name: name
+        - name: id
           in: query
           description: detailed information on this specific beer
           required: true
@@ -416,26 +416,32 @@ definitions:
     type: object
     required:
       - id
-      - beer_name
+      - name
       - abv
       - ibu
       - label_url
       - description
       - type_name
+      - rating
+      - comment
     properties:
       id:
-        type: string
-      beer_name:
+        type: integer
+      name:
         type: string
       abv:
-        type: string
+        type: number
       ibu:
-        type: string
+        type: integer
       label_url:
         type: string
       description:
         type: string
       type_name:
+        type: string
+      rating:
+        type: integer
+      comment:
         type: string
   WishlistResponse:
     required:
