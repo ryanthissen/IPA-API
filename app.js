@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const path = require('path');
 app.use(express.static(path.join('public')));
-// app.use(cors());
+app.use(cors());
 
 var config = {
   appRoot: __dirname // required config
