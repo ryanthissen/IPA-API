@@ -275,9 +275,9 @@ definitions:
           type: number
         ibu:
           type: integer
-        description:
-            type: string
         label_url:
+          type: string
+        description:
           type: string
         type_name:
           type: string
@@ -410,6 +410,16 @@ definitions:
               type: string
             type_name:
               type: string
+  # Cookie:
+  #   type: header
+  #   properties:
+  #     token:
+  #       type: int64
+  #       description: cookie token
+  # Authenticated:
+  #   properties:
+  #     message:
+  #       type: boolean
   ErrorResponse:
     required:
       - message

@@ -1,7 +1,13 @@
 'use strict';
 
-var SwaggerExpress = require('swagger-express-mw');
-var app = require('express')();
+const SwaggerExpress = require('swagger-express-mw');
+const express = require('express')
+const app = express();
+const cors = require('cors');
+
+const path = require('path');
+app.use(express.static(path.join('public')));
+app.use(cors());
 
 var config = {
   appRoot: __dirname // required config

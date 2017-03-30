@@ -43,10 +43,10 @@ suite('User tests', (done) => {
       });
   });
 
-  test('POST /users', (done) => {
+  test('POST /ipa-api/users', (done) => {
     const password = 'LebronSux';
     request(server)
-      .post('/users')
+      .post('/ipa-api/users')
       .set('Accept', 'application/json')
       .send({
         first_name: 'Steph',

@@ -12,6 +12,7 @@
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.1",
     "express": "^4.12.3",
     "express-validation": "^1.0.2",
     "fetch": "^1.1.0",
@@ -22,6 +23,7 @@
     "morgan": "^1.8.1",
     "node-fetch": "^1.6.3",
     "nodemon": "^1.11.0",
+    "path": "^0.12.7",
     "pg": "^6.1.5",
     "supertest": "^1.2.0",
     "swagger-express-mw": "^0.1.0"
@@ -33,7 +35,8 @@
     "supertest": "^1.0.0"
   },
   "scripts": {
-    "start": "node app.js",
+    "heroku-postbuild": "knex migrate:latest",
+    "start": "nodemon app.js",
     "edit": "swagger project edit",
     "test": "mocha"
   }
