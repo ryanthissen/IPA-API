@@ -2,13 +2,11 @@ swagger: "2.0"
 info:
   version: "0.0.1"
   title: IPA-API
-# during dev, should point to your local machine
-host: matt-ryan-ipa-api.herokuapp.com
+host: the-ipa-api.herokuapp.com
 # basePath prefixes all resource paths
 basePath: /ipa-api
 #
 schemes:
-  # tip: remove http to make production-grade
   - http
   - https
 consumes:
@@ -155,28 +153,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  # /token:
-  #   get:
-  #     description: gets token to authenticate user
-  #     operationId: tokenCheck
-  #     parameters:
-  #       - name: cookie
-  #         in: header
-  #         description: gets token from req.swagger.user.cookie to authenticate user
-  #         required: false
-  #         schema:
-  #           $ref: '#/definitions/Cookie'
-  #     responses:
-  #       "200":
-  #         description: Success
-  #         schema:
-  #           a pointer to a definition
-  #           $ref: "#/definitions/Authenticated"
-  #       responses may fall through to errors
-  #       default:
-  #         description: Error
-  #         schema:
-  #           $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 definitions:
@@ -207,15 +183,11 @@ definitions:
   CreateUserSuccess:
     type: object
     required:
-      # - token
       - first_name
       - last_name
       - username
       - email
     properties:
-      # token:
-      #   type: string
-      #   description: jwt token
       first_name:
         type: string
         description: first name of new user
@@ -410,16 +382,6 @@ definitions:
               type: string
             type_name:
               type: string
-  # Cookie:
-  #   type: header
-  #   properties:
-  #     token:
-  #       type: int64
-  #       description: cookie token
-  # Authenticated:
-  #   properties:
-  #     message:
-  #       type: boolean
   ErrorResponse:
     required:
       - message

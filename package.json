@@ -1,8 +1,8 @@
 {
   "name": "ipa-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
-  "description": "New Swagger API Project",
+  "description": "The IPA API",
   "keywords": [],
   "author": "",
   "license": "ISC",
