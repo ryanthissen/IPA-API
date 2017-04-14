@@ -2,11 +2,12 @@ swagger: "2.0"
 info:
   version: "0.0.1"
   title: IPA-API
-host: https://the-ipa-api.herokuapp.com
+host: the-ipa-api.herokuapp.com
 # basePath prefixes all resource paths
 basePath: /ipa-api
 #
 schemes:
+  - http
   - https
 consumes:
   - application/json
