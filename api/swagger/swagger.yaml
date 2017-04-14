@@ -246,9 +246,9 @@ definitions:
           type: number
         ibu:
           type: integer
-        label_url:
-          type: string
         description:
+            type: string
+        label_url:
           type: string
         type_name:
           type: string

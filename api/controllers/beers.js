@@ -21,7 +21,6 @@ module.exports.addBeer = function addBeer(req, res, next) {
     let returnBeer = result[0];
     delete returnBeer.created_at;
     delete returnBeer.updated_at;
-    console.log(returnBeer);
     res.set('Content-Type', 'application/json')
     res.status(200).send(returnBeer)
   })
