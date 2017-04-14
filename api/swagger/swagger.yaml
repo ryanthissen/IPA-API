@@ -7,8 +7,8 @@ host: the-ipa-api.herokuapp.com
 basePath: /ipa-api
 #
 schemes:
-  - http
   - https
+  - http
 consumes:
   - application/json
 produces:
